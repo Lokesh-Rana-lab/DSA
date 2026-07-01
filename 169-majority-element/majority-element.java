@@ -1,3 +1,4 @@
+import java.util.HashMap;
 class Solution {
     public int majorityElement(int[] nums) {
     //    Arrays.sort(nums);
@@ -13,22 +14,32 @@ class Solution {
       
     //    }return -1;
 
-    int candidate = nums[0];
-    int vote = 1;
-    for(int i=1;i<nums.length;i++){
-        if(nums[i]==candidate){
-        vote++;
+    // int candidate = nums[0];
+    // int vote = 1;
+    // for(int i=1;i<nums.length;i++){
+    //     if(nums[i]==candidate){
+    //     vote++;
 
-        }
-        else if(vote==0){
-           candidate=nums[i];
-           vote=1;
-        }
-        else {
-            vote--;
+    //     }
+    //     else if(vote==0){
+    //        candidate=nums[i];
+    //        vote=1;
+    //     }
+    //     else {
+    //         vote--;
+    //     }
+    // }
+    // return candidate;
+
+    HashMap<Integer,Integer> map = new HashMap<>();
+    for(int num:nums){
+        map.put(num, map.getOrDefault(num,0)+1);
+    }
+    for(int num:nums){
+        if(map.get(num)>nums.length/2){
+            return num;
         }
     }
-    return candidate;
-
+    return -1;
     }
 }
