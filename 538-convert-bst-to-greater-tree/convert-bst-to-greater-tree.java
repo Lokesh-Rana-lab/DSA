@@ -15,24 +15,44 @@
  */
 
 
+// class Solution {
+//     public static void inorder(TreeNode root , ArrayList<TreeNode> arr){
+//         if(root == null) return;
+//         inorder(root.left,arr);
+//         arr.add(root);
+//         inorder(root.right,arr);
+
+
+//     }
+//     public TreeNode convertBST(TreeNode root) {
+//         ArrayList<TreeNode> arr = new ArrayList<>();
+//         inorder(root,arr);
+//         Collections.reverse(arr);
+//         int sum = 0;
+//         for (int i = 0; i < arr.size(); i++) {
+//            sum += arr.get(i).val;
+//            arr.get(i).val = sum;
+//       }
+//         return root;
+//     }
+    
+// }
+
+ // without extra space complexity
 class Solution {
-    public static void inorder(TreeNode root , ArrayList<TreeNode> arr){
+    static int sum = 0;
+    public static void revInorder(TreeNode root){
         if(root == null) return;
-        inorder(root.left,arr);
-        arr.add(root);
-        inorder(root.right,arr);
+        revInorder(root.right);    // right se left chla du
+        sum+=root.val;
+        root.val = sum;
+        revInorder(root.left);
 
 
     }
     public TreeNode convertBST(TreeNode root) {
-        ArrayList<TreeNode> arr = new ArrayList<>();
-        inorder(root,arr);
-        Collections.reverse(arr);
-        int sum = 0;
-        for (int i = 0; i < arr.size(); i++) {
-           sum += arr.get(i).val;
-           arr.get(i).val = sum;
-      }
+        sum = 0;
+        revInorder(root);
         return root;
     }
     
